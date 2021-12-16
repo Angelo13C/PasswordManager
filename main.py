@@ -32,7 +32,7 @@ def register():
 def menu():
   while True:
     print("\n")
-    choice = print_menu(["Insert new account", "Get password from account", "List accounts", "Change master password", "Exit"])
+    choice = print_menu(["Insert new account", "Get password from account", "List accounts", "Delete account", "Change master password", "Exit"])
     
     if choice == 1:
       portal = input("- Insert the portal: ")
@@ -57,8 +57,19 @@ def menu():
       accounts = password_manager.get_accounts()
       print("\n")
       print(tabulate(accounts, headers=["Portal", "Username"]))
-
+      
     elif choice == 4:
+      portal = input("- Insert the portal: ")
+      username = input("- Insert the username of the account to delete: ")
+
+      deleted_accounts_count = password_manager.delete_account(portal, username)
+      print("")
+      if deleted_accounts_count == 0:
+        print("No account has been deleted because it has not been found in the database!")
+      else:
+        print("Account deleted successfully!")
+
+    elif choice == 5:
       current_master_password = getpass.getpass("- Insert the current master password: ")
       new_master_password = getpass.getpass("- Insert the new master password: ")
       print("")
@@ -68,7 +79,7 @@ def menu():
       else:
         print("The current password you inserted is invalid!")
 
-    elif choice == 5:
+    elif choice == 6:
       break
 
     print("\n")

@@ -30,6 +30,11 @@ def add_account(portal, username, password):
     database.execute("""INSERT INTO Account (Portal, Username, Password)
     VALUES (?, ?, ?);""", (portal, username, encrypt_password))
 
+def delete_account(portal, username):
+    delete_accounts_count = len(database.execute("""SELECT 1 FROM Account WHERE Portal = ? AND Username = ?""", (portal, username)))
+    database.execute("""DELETE FROM Account WHERE Portal = ? AND Username = ?""", (portal, username))
+    return delete_accounts_count
+
 def get_password(portal, username):
     account = database.execute("""SELECT Password FROM Account WHERE
     Portal = ? AND Username = ?;""", (portal, username))
