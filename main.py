@@ -2,6 +2,7 @@ import password_manager
 import os
 from tabulate import tabulate
 import pyperclip
+import getpass
 
 def main():
   __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
@@ -18,14 +19,14 @@ def main():
 def login():
   valid_password = False
   while not valid_password:
-    master_password = input("- Insert the master password: ")
+    master_password = getpass.getpass("- Insert the master password: ")
     valid_password = password_manager.login(master_password)
     if not valid_password:
       print("Login failed, password not valid, retry")
 
 def register():
   print("Registering an account because no database has been found")
-  master_password = input("- Insert the master password of the account that will be generated (YOU MUST REMEMBER THIS): ")
+  master_password = getpass.getpass("- Insert the master password of the account that will be generated (YOU MUST REMEMBER THIS): ")
   password_manager.register(master_password)
   
 def menu():
@@ -58,8 +59,8 @@ def menu():
       print(tabulate(accounts, headers=["Portal", "Username"]))
 
     elif choice == 4:
-      current_master_password = input("- Insert the current master password: ")
-      new_master_password = input("- Insert the new master password: ")
+      current_master_password = getpass.getpass("- Insert the current master password: ")
+      new_master_password = getpass.getpass("- Insert the new master password: ")
       print("")
 
       if(password_manager.change_master_password(current_master_password, new_master_password)):
