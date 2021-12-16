@@ -7,7 +7,7 @@ from pathlib import Path
 #The length of the salt in bytes
 SALT_LENGTH = 16
 NONCE_LENGTH = 16
-FILENAME = "password.txt"
+FILENAME = "MasterPassword.txt"
 value = ""
 
 def exists():
