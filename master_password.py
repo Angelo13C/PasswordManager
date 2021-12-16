@@ -31,14 +31,11 @@ def verify(password):
     is_valid = hasher.verify(password_hashed, password)
     file.close()
 
-    #Rehash the password if outdated (?)
     if is_valid:
         value = password
+        #Rehash the password if outdated (?)
         if hasher.needs_rehash(password_hashed):
-            password_rehashed = hasher.hash(password)
-            file = open(FILENAME, "w")
-            file.write(password_rehashed)
-            file.close()
+            change(password)
 
     return is_valid
 
