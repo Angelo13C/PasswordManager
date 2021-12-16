@@ -1,7 +1,7 @@
 import sqlite3
 
 class Database:
-    def __init__(self, name = "test.db"):
+    def __init__(self, name = "database.db"):
         self.connection = sqlite3.connect(name)
     
     def execute(self, sql, parameters = None):
