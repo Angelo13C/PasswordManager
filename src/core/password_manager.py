@@ -1,5 +1,5 @@
-from database import Database
-import master_password
+from core.authentication import master_password
+from core.storage.database import Database
 import string
 import secrets
 
